@@ -1,19 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 import SearchComponent from './components/SearchComponent';
+import { useState } from 'react';
 import Member from './components/Member';
 import Pharmacy from './components/Pharmacy';
-import { SearchProvider } from './util/SearchContext';
+import {useSearch} from './util/SearchContext'
+
 
 function App() {
+  const { searchResult} = useSearch();
   return (
-    <SearchProvider>
+
     <div className="App">
 <SearchComponent/>
-<Member/>
-<Pharmacy/>
+{searchResult ? (
+          <div>
+            <Member searchResult={searchResult} />
+            <Pharmacy searchResult={searchResult} />
+          </div>
+        ) : null}
     </div>
-    </SearchProvider>
+  
   );
 }
 

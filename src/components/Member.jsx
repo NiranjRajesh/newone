@@ -1,6 +1,10 @@
-import React from 'react'
-
+import React,{useState,useEffect} from 'react'
+import { useSearch } from '../util/SearchContext';
 const Member = () => {
+  
+  const { searchResults} = useSearch();
+
+
   return (
     <div className='m-container'>
         <div className='heading'
@@ -11,14 +15,14 @@ const Member = () => {
        
         <div className='member-details'>
             <div className="l-detail">
-            <p className='name'>John Smith</p>
-            <p className='dob'>DOB 1/1/1990</p>
+            <p className='name'>{searchResults.firstname+ " " +searchResults.lastname}</p>
+            <p className='dob'>{searchResults.dateofbirth} </p>
             <p>Address:</p>
             <p>66683, william</p>
             </div>
             <div className="r-detail">
 
-                <p>Gender: Male</p>
+                <p>Gender: {searchResults.gender==="F"?"Female":"Male"}</p>
                 <p>Phone: 568-299-00</p>
             </div>
        

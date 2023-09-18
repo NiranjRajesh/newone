@@ -3,20 +3,43 @@ import { useSearch } from '../util/SearchContext';
 
 const SearchComponent = () => {
   
-  const { searchQuery} = useSearch();
+  const { searchQuery, updateSearchQuery,updateSearchResults} = useSearch();
   
   const handleInputChange = (e) => {
-    
+    updateSearchQuery(e.target.value);
+  };
+  const handleSearch = async () => {
+    try {
+      // Send a request to the backend to perform the search
+      const results = await searchDatabase(searchQuery);
+   
+      updateSearchResults(results);
+    } catch (error) {
+      console.error('Error searching database:', error);
+    }
   };
 
-  const handleSearch = () => {
-    
+  const searchDatabase = async (query) => {
+    try {
 
-    // Filter results based on the search query
+      //Evide api ede get with id
+      const response = await fetch(`https://localhost:7004/api/web/${query}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-
-  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
   };
+
 
   return (
     <div className='searchContainer'>
@@ -24,6 +47,7 @@ const SearchComponent = () => {
       <input
         type="text"
         placeholder="Enter"
+        className='search-bar'
         value={searchQuery}
         onChange={handleInputChange}
       />

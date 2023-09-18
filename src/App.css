@@ -3,6 +3,7 @@
 .btn{
   background-color: rgb(212, 211, 211);
   padding: 0.25em 1.5em;
+  cursor: pointer;
 
   border:2px solid black;
 }
@@ -10,6 +11,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-top:2em;
 }
 
 .m-container{

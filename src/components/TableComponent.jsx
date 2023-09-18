@@ -1,20 +1,10 @@
 import React,{useEffect,useState} from 'react';
+import {useSearch} from '../util/SearchContext'
 
 const TableComponent = () => {
-    const [data, setJsonData] = useState([]);
 
-  useEffect(() => {
-    // Load JSON data from a file
-    fetch('pharmacy.json') // Replace with the actual path to your JSON file
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setJsonData(data.item);
-      })
-      .catch((error) => {
-        console.error('Error loading JSON data:', error);
-      });
-  }, []);
+  const { searchResults} = useSearch();
+ 
   return (
     <table className="custom-table">
       <thead>
@@ -26,7 +16,7 @@ const TableComponent = () => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (
+        {searchResults.map((item, index) => (
           <tr key={index}>
             <td>{item.date}</td>
             <td>{item.quantity}</td>
