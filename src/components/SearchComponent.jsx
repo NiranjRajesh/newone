@@ -23,12 +23,7 @@ const SearchComponent = () => {
     try {
 
       //Evide api ede get with id
-      const response = await fetch(`https://localhost:7004/api/web/${query}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query }),
-      });
+      const response = await fetch(`https://localhost:7004/api/web/${query}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
